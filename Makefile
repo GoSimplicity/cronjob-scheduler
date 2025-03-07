@@ -7,10 +7,10 @@ build:
 	CGO_ENABLED=0 GOOS=linux go build -o scheduler .
 
 docker-build: build
-	docker build -t Bamboo/cronjob-scheduler:v1 .
+	docker build -t bamboo/cronjob-scheduler:v1 .
 
 docker-push:
-	docker push Bamboo/cronjob-scheduler:v1
+	docker push bamboo/cronjob-scheduler:v1
 
 deploy:
 	kubectl apply -f deploy/

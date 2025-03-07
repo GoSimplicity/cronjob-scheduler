@@ -27,7 +27,7 @@ CMD ["./scheduler"]
 #### 构建并推送镜像
 ```bash
 # 构建镜像
-docker build -t Bamboo/cronjob-scheduler:v1 .
+docker build -t bamboo/cronjob-scheduler:v1 .
 ```
 
 ---
@@ -92,7 +92,7 @@ spec:
       serviceAccountName: cronjob-scheduler-sa
       containers:
       - name: scheduler
-        image: Bamboo/cronjob-scheduler:v1
+        image: bamboo/cronjob-scheduler:v1
         env:
         - name: NAMESPACE
           value: "default"
