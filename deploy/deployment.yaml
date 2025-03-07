@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cronjob-scheduler
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cronjob-scheduler
+  template:
+    metadata:
+      labels:
+        app: cronjob-scheduler
+    spec:
+      serviceAccountName: cronjob-scheduler-sa
+      containers:
+      - name: scheduler
+        image: Bamboo/cronjob-scheduler:v1
+        env:
+        - name: NAMESPACE
+          value: "default"
+        - name: CONFIGMAP_NAME
+          value: "cronjob-configs"
+        - name: POLL_INTERVAL
+          value: "30"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"

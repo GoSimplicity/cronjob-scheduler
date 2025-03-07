@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cronjob-configs
+  namespace: default
+data:
+  jobs.yaml: |
+    jobs:
+      - name: backup-job
+        schedule: "0 1 * * *"
+        image: backup-image:v1
+        command: ["/bin/sh", "-c", "echo performing backup"]
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+      - name: cleanup-job
+        schedule: "0 2 * * *"
+        image: cleanup-image:v1
+        command: ["/bin/sh", "-c", "echo cleanup"]
